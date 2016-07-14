@@ -1,0 +1,526 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DD680BEB1D37A56900FEE8F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD680BEA1D37A56900FEE8F0 /* AppDelegate.swift */; };
+		DD680BED1D37A56900FEE8F0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD680BEC1D37A56900FEE8F0 /* ViewController.swift */; };
+		DD680BF01D37A56900FEE8F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD680BEE1D37A56900FEE8F0 /* Main.storyboard */; };
+		DD680BF21D37A56900FEE8F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD680BF11D37A56900FEE8F0 /* Assets.xcassets */; };
+		DD680BF51D37A56900FEE8F0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD680BF31D37A56900FEE8F0 /* LaunchScreen.storyboard */; };
+		DD680C001D37A56900FEE8F0 /* GeometryViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD680BFF1D37A56900FEE8F0 /* GeometryViewTests.swift */; };
+		DD680C0B1D37A56900FEE8F0 /* GeometryViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD680C0A1D37A56900FEE8F0 /* GeometryViewUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DD680BFC1D37A56900FEE8F0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DD680BDF1D37A56900FEE8F0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DD680BE61D37A56900FEE8F0;
+			remoteInfo = GeometryView;
+		};
+		DD680C071D37A56900FEE8F0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DD680BDF1D37A56900FEE8F0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DD680BE61D37A56900FEE8F0;
+			remoteInfo = GeometryView;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		DD680BE71D37A56900FEE8F0 /* GeometryView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeometryView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD680BEA1D37A56900FEE8F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DD680BEC1D37A56900FEE8F0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DD680BEF1D37A56900FEE8F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DD680BF11D37A56900FEE8F0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DD680BF41D37A56900FEE8F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		DD680BF61D37A56900FEE8F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DD680BFB1D37A56900FEE8F0 /* GeometryViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GeometryViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD680BFF1D37A56900FEE8F0 /* GeometryViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryViewTests.swift; sourceTree = "<group>"; };
+		DD680C011D37A56900FEE8F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DD680C061D37A56900FEE8F0 /* GeometryViewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GeometryViewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD680C0A1D37A56900FEE8F0 /* GeometryViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryViewUITests.swift; sourceTree = "<group>"; };
+		DD680C0C1D37A56900FEE8F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DD680BE41D37A56900FEE8F0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DD680BF81D37A56900FEE8F0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DD680C031D37A56900FEE8F0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DD680BDE1D37A56900FEE8F0 = {
+			isa = PBXGroup;
+			children = (
+				DD680BE91D37A56900FEE8F0 /* GeometryView */,
+				DD680BFE1D37A56900FEE8F0 /* GeometryViewTests */,
+				DD680C091D37A56900FEE8F0 /* GeometryViewUITests */,
+				DD680BE81D37A56900FEE8F0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DD680BE81D37A56900FEE8F0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DD680BE71D37A56900FEE8F0 /* GeometryView.app */,
+				DD680BFB1D37A56900FEE8F0 /* GeometryViewTests.xctest */,
+				DD680C061D37A56900FEE8F0 /* GeometryViewUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DD680BE91D37A56900FEE8F0 /* GeometryView */ = {
+			isa = PBXGroup;
+			children = (
+				DD680BEA1D37A56900FEE8F0 /* AppDelegate.swift */,
+				DD680BEC1D37A56900FEE8F0 /* ViewController.swift */,
+				DD680BEE1D37A56900FEE8F0 /* Main.storyboard */,
+				DD680BF11D37A56900FEE8F0 /* Assets.xcassets */,
+				DD680BF31D37A56900FEE8F0 /* LaunchScreen.storyboard */,
+				DD680BF61D37A56900FEE8F0 /* Info.plist */,
+			);
+			path = GeometryView;
+			sourceTree = "<group>";
+		};
+		DD680BFE1D37A56900FEE8F0 /* GeometryViewTests */ = {
+			isa = PBXGroup;
+			children = (
+				DD680BFF1D37A56900FEE8F0 /* GeometryViewTests.swift */,
+				DD680C011D37A56900FEE8F0 /* Info.plist */,
+			);
+			path = GeometryViewTests;
+			sourceTree = "<group>";
+		};
+		DD680C091D37A56900FEE8F0 /* GeometryViewUITests */ = {
+			isa = PBXGroup;
+			children = (
+				DD680C0A1D37A56900FEE8F0 /* GeometryViewUITests.swift */,
+				DD680C0C1D37A56900FEE8F0 /* Info.plist */,
+			);
+			path = GeometryViewUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DD680BE61D37A56900FEE8F0 /* GeometryView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DD680C0F1D37A56900FEE8F0 /* Build configuration list for PBXNativeTarget "GeometryView" */;
+			buildPhases = (
+				DD680BE31D37A56900FEE8F0 /* Sources */,
+				DD680BE41D37A56900FEE8F0 /* Frameworks */,
+				DD680BE51D37A56900FEE8F0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GeometryView;
+			productName = GeometryView;
+			productReference = DD680BE71D37A56900FEE8F0 /* GeometryView.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DD680BFA1D37A56900FEE8F0 /* GeometryViewTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DD680C121D37A56900FEE8F0 /* Build configuration list for PBXNativeTarget "GeometryViewTests" */;
+			buildPhases = (
+				DD680BF71D37A56900FEE8F0 /* Sources */,
+				DD680BF81D37A56900FEE8F0 /* Frameworks */,
+				DD680BF91D37A56900FEE8F0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DD680BFD1D37A56900FEE8F0 /* PBXTargetDependency */,
+			);
+			name = GeometryViewTests;
+			productName = GeometryViewTests;
+			productReference = DD680BFB1D37A56900FEE8F0 /* GeometryViewTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		DD680C051D37A56900FEE8F0 /* GeometryViewUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DD680C151D37A56900FEE8F0 /* Build configuration list for PBXNativeTarget "GeometryViewUITests" */;
+			buildPhases = (
+				DD680C021D37A56900FEE8F0 /* Sources */,
+				DD680C031D37A56900FEE8F0 /* Frameworks */,
+				DD680C041D37A56900FEE8F0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DD680C081D37A56900FEE8F0 /* PBXTargetDependency */,
+			);
+			name = GeometryViewUITests;
+			productName = GeometryViewUITests;
+			productReference = DD680C061D37A56900FEE8F0 /* GeometryViewUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DD680BDF1D37A56900FEE8F0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0800;
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = "Marcus Rossel";
+				TargetAttributes = {
+					DD680BE61D37A56900FEE8F0 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = 8YSJ38HAEZ;
+						DevelopmentTeamName = "Marcus Rossel (Personal Team)";
+						ProvisioningStyle = Automatic;
+					};
+					DD680BFA1D37A56900FEE8F0 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = 8YSJ38HAEZ;
+						DevelopmentTeamName = "Marcus Rossel (Personal Team)";
+						ProvisioningStyle = Automatic;
+						TestTargetID = DD680BE61D37A56900FEE8F0;
+					};
+					DD680C051D37A56900FEE8F0 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = 8YSJ38HAEZ;
+						DevelopmentTeamName = "Marcus Rossel (Personal Team)";
+						ProvisioningStyle = Automatic;
+						TestTargetID = DD680BE61D37A56900FEE8F0;
+					};
+				};
+			};
+			buildConfigurationList = DD680BE21D37A56900FEE8F0 /* Build configuration list for PBXProject "GeometryView" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DD680BDE1D37A56900FEE8F0;
+			productRefGroup = DD680BE81D37A56900FEE8F0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DD680BE61D37A56900FEE8F0 /* GeometryView */,
+				DD680BFA1D37A56900FEE8F0 /* GeometryViewTests */,
+				DD680C051D37A56900FEE8F0 /* GeometryViewUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DD680BE51D37A56900FEE8F0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DD680BF51D37A56900FEE8F0 /* LaunchScreen.storyboard in Resources */,
+				DD680BF21D37A56900FEE8F0 /* Assets.xcassets in Resources */,
+				DD680BF01D37A56900FEE8F0 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DD680BF91D37A56900FEE8F0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DD680C041D37A56900FEE8F0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DD680BE31D37A56900FEE8F0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DD680BED1D37A56900FEE8F0 /* ViewController.swift in Sources */,
+				DD680BEB1D37A56900FEE8F0 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DD680BF71D37A56900FEE8F0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DD680C001D37A56900FEE8F0 /* GeometryViewTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DD680C021D37A56900FEE8F0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DD680C0B1D37A56900FEE8F0 /* GeometryViewUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DD680BFD1D37A56900FEE8F0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DD680BE61D37A56900FEE8F0 /* GeometryView */;
+			targetProxy = DD680BFC1D37A56900FEE8F0 /* PBXContainerItemProxy */;
+		};
+		DD680C081D37A56900FEE8F0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DD680BE61D37A56900FEE8F0 /* GeometryView */;
+			targetProxy = DD680C071D37A56900FEE8F0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		DD680BEE1D37A56900FEE8F0 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DD680BEF1D37A56900FEE8F0 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		DD680BF31D37A56900FEE8F0 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DD680BF41D37A56900FEE8F0 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DD680C0D1D37A56900FEE8F0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DD680C0E1D37A56900FEE8F0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DD680C101D37A56900FEE8F0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = GeometryView/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.marcusrossel.GeometryView;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		DD680C111D37A56900FEE8F0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = GeometryView/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.marcusrossel.GeometryView;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		DD680C131D37A56900FEE8F0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = GeometryViewTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.marcusrossel.GeometryViewTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GeometryView.app/GeometryView";
+			};
+			name = Debug;
+		};
+		DD680C141D37A56900FEE8F0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = GeometryViewTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.marcusrossel.GeometryViewTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GeometryView.app/GeometryView";
+			};
+			name = Release;
+		};
+		DD680C161D37A56900FEE8F0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = GeometryViewUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.marcusrossel.GeometryViewUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = GeometryView;
+			};
+			name = Debug;
+		};
+		DD680C171D37A56900FEE8F0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = GeometryViewUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.marcusrossel.GeometryViewUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = GeometryView;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DD680BE21D37A56900FEE8F0 /* Build configuration list for PBXProject "GeometryView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DD680C0D1D37A56900FEE8F0 /* Debug */,
+				DD680C0E1D37A56900FEE8F0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DD680C0F1D37A56900FEE8F0 /* Build configuration list for PBXNativeTarget "GeometryView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DD680C101D37A56900FEE8F0 /* Debug */,
+				DD680C111D37A56900FEE8F0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		DD680C121D37A56900FEE8F0 /* Build configuration list for PBXNativeTarget "GeometryViewTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DD680C131D37A56900FEE8F0 /* Debug */,
+				DD680C141D37A56900FEE8F0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		DD680C151D37A56900FEE8F0 /* Build configuration list for PBXNativeTarget "GeometryViewUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DD680C161D37A56900FEE8F0 /* Debug */,
+				DD680C171D37A56900FEE8F0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DD680BDF1D37A56900FEE8F0 /* Project object */;
+}
