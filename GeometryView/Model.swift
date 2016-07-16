@@ -1,0 +1,182 @@
+//
+//  Model.swift
+//  GeometryView
+//
+//  Created by Marcus Rossel on 14.07.16.
+//  Copyright © 2016 Marcus Rossel. All rights reserved.
+//
+
+import UIKit
+
+/// A struct describing a two-dimensional line with a starting end an end point.
+struct Line {
+  enum LineConnectionError: ErrorProtocol {
+    case noPoints
+    case singlePoint(CGPoint)
+  }
+
+  enum LineSegmentationError: ErrorProtocol {
+    case zeroSegments
+    case oneSegment
+  }
+
+  /// Returns an array of `Line`s connecting all of the `points` in order.
+  static func linesConsecutivelyConnecting(points: [CGPoint]) throws -> [Line] {
+    guard !points.isEmpty else { throw LineConnectionError.noPoints }
+    guard points.count > 1 else {
+      throw LineConnectionError.singlePoint(points.first!)
+    }
+
+    // Shifts the `points` so that the last point moves to the `startIndex`.
+    var shiftedPoints = points
+    shiftedPoints.insert(shiftedPoints.removeLast(), at: 0)
+
+    // The `zip` creates pairs of a point and its successor.
+    let pointPairs = zip(points, shiftedPoints)
+
+    // Returns an array of `Line`s constructed from the `pointPairs`.
+    return pointPairs.map(Line.init)
+  }
+
+  var start: CGPoint
+  var vector: CGVector
+
+  var endPoint: CGPoint {
+    return start + vector
+  }
+
+  /// Returns an array containing the points that segment `self` into the given
+  /// `numberOfSegments`.
+  func segmented(numberOfSegments: UInt) throws -> [CGPoint] {
+    guard numberOfSegments > 0 else { throw LineSegmentationError.zeroSegments }
+    guard numberOfSegments > 1 else { throw LineSegmentationError.oneSegment }
+
+    // Creates an array of `CGFloat`s holding the incremental fractions
+    // discribed by `n / numberOfSegments where n < numberOfSegments`.
+    let mulitpliers = (1..<numberOfSegments).map { segment in
+      return CGFloat(segment) / CGFloat(numberOfSegments)
+    }
+
+    // Creates an array of points by incrementally adding a fraction of `vector`
+    // to `start`.
+    return mulitpliers.map { return start + ($0 * vector) }
+  }
+
+  init(start: CGPoint, vector: CGVector) {
+    self.start = start
+    self.vector = vector
+  }
+
+  init(start: CGPoint, end: CGPoint) {
+    self.start = start
+    vector = CGVector(dx: end.x - start.x, dy: end.y - start.y)
+  }
+}
+
+// Vector operation
+func + (point: CGPoint, vector: CGVector) -> CGPoint {
+  return CGPoint(x: point.x + vector.dx, y: point.y + vector.dy)
+}
+
+// Vector operation
+func * (multiplier: CGFloat, vector: CGVector) -> CGVector {
+  return CGVector(dx: multiplier * vector.dx, dy: multiplier * vector.dy)
+}
+
+extension CGPoint {
+  enum PolygonConstructionError: ErrorProtocol {
+    case invalidSideCount(Int)
+    case invalidCenterToCornerDistance(CGFloat)
+  }
+
+  /// Returns an array of points holding the coordinates for the corners of a
+  /// homogenous polygon with `sideCount` sides.
+  static func cornerPointsForRegularPolygon(
+    withSideCount sideCount: Int,
+    center: CGPoint,
+    cornerDistance distance: CGFloat
+  ) throws -> [CGPoint] {
+    guard sideCount > 2 else {
+      throw PolygonConstructionError.invalidSideCount(sideCount)
+    }
+    guard distance > 0 else {
+      throw PolygonConstructionError.invalidCenterToCornerDistance(distance)
+    }
+
+    // Calculates the angle needed to construct the polygon iteratively.
+    let modifier = (CGFloat(sideCount) - 2) / CGFloat(sideCount)
+    let insideAngle = CGFloat.pi - (CGFloat.pi * modifier)
+
+    // Constructs an array of `CGFloat`s incrementally describing the angles for
+    // reaching each corner point of the polygon.
+    let angles = (1...sideCount).map { side in
+      return insideAngle * CGFloat(side)
+    }
+
+    // Constructs an array of `CGPoints` describing the corner points of the
+    // polygon by using the incremental `angles` and adding a vector of length
+    // `distance` to `center`.
+    let points = angles.map { angle -> CGPoint in
+      let x = distance * sin(angle) + center.x
+      let y = distance * cos(angle) + center.y
+
+      return CGPoint(x: x, y: y)
+    }
+
+    return points
+  }
+}
+
+extension UIBezierPath {
+  enum PolygonConstructionError: ErrorProtocol {
+    case noPoint
+    case tooFewPoints([CGPoint])
+  }
+
+  /// Returns a `UIBezierPath` that connects all of the given `points` in s
+  /// closed fashion.
+  static func polygon(fromPoints points: [CGPoint]) throws -> UIBezierPath {
+    guard points.count > 0 else { throw PolygonConstructionError.noPoint }
+    guard points.count > 2 else {
+      throw PolygonConstructionError.tooFewPoints(points)
+    }
+
+    var points = points
+    let path = UIBezierPath()
+
+    path.move(to: points.first!)
+    points.insert(points.removeFirst(), at: points.endIndex)
+    points.forEach { path.addLine(to: $0) }
+
+    return path
+  }
+
+  /// Returns a `UIBezierPath` forming a regular polygon with the given
+  /// properties.
+  static func regularPolygon(
+    sideCount: Int,
+    center: CGPoint,
+    sideLength: CGFloat
+  ) throws -> UIBezierPath {
+    // Returns a circle if `sideCount` is `1`.
+    guard sideCount != 1 else {
+      return UIBezierPath(arcCenter: center,
+                          radius: sideLength,
+                          startAngle: 0, endAngle: 2 * CGFloat.pi,
+                          clockwise: false)
+    }
+
+    // Gets the polygon's corner points.
+    let points = try CGPoint.cornerPointsForRegularPolygon(withSideCount: sideCount,
+                                                           center: center,
+                                                           cornerDistance: sideLength)
+    let polygonPath = UIBezierPath()
+
+    // Moves to the last point and then starts iterating through all of them.
+    polygonPath.move(to: points.last!)
+    points.forEach { polygonPath.addLine(to: $0) }
+
+    return polygonPath
+  }
+}
+
