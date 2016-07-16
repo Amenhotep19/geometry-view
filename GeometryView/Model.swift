@@ -10,26 +10,29 @@ import UIKit
 
 /// A struct describing a two-dimensional line with a starting end an end point.
 struct Line {
-  enum LineConnectionError: ErrorProtocol {
+  enum ConnectionError : ErrorProtocol {
     case noPoints
     case singlePoint(CGPoint)
   }
 
-  enum LineSegmentationError: ErrorProtocol {
-    case zeroSegments
-    case oneSegment
+  enum SegmentationError : ErrorProtocol {
+    case invalidNumberOfSegments(Int)
   }
 
   /// Returns an array of `Line`s connecting all of the `points` in order.
   static func linesConsecutivelyConnecting(points: [CGPoint]) throws -> [Line] {
-    guard !points.isEmpty else { throw LineConnectionError.noPoints }
+    guard !points.isEmpty else { throw ConnectionError.noPoints }
     guard points.count > 1 else {
-      throw LineConnectionError.singlePoint(points.first!)
+      throw ConnectionError.singlePoint(points.first!)
+    }
+
+    guard points.count > 2 else {
+      return [Line(start: points.first!, end: points.last!)]
     }
 
     // Shifts the `points` so that the last point moves to the `startIndex`.
     var shiftedPoints = points
-    shiftedPoints.insert(shiftedPoints.removeLast(), at: 0)
+    shiftedPoints.append(shiftedPoints.removeFirst())
 
     // The `zip` creates pairs of a point and its successor.
     let pointPairs = zip(points, shiftedPoints)
@@ -41,15 +44,16 @@ struct Line {
   var start: CGPoint
   var vector: CGVector
 
-  var endPoint: CGPoint {
+  var end: CGPoint {
     return start + vector
   }
 
   /// Returns an array containing the points that segment `self` into the given
   /// `numberOfSegments`.
-  func segmented(numberOfSegments: UInt) throws -> [CGPoint] {
-    guard numberOfSegments > 0 else { throw LineSegmentationError.zeroSegments }
-    guard numberOfSegments > 1 else { throw LineSegmentationError.oneSegment }
+  func segmented(numberOfSegments: Int) throws -> [CGPoint] {
+    guard numberOfSegments > 1 else {
+      throw SegmentationError.invalidNumberOfSegments(numberOfSegments)
+    }
 
     // Creates an array of `CGFloat`s holding the incremental fractions
     // discribed by `n / numberOfSegments where n < numberOfSegments`.
@@ -73,6 +77,11 @@ struct Line {
   }
 }
 
+extension Line : Equatable { }
+func ==(lhs: Line, rhs: Line) -> Bool {
+  return (lhs.start, lhs.vector) == (rhs.start, rhs.vector)
+}
+
 // Vector operation
 func + (point: CGPoint, vector: CGVector) -> CGPoint {
   return CGPoint(x: point.x + vector.dx, y: point.y + vector.dy)
@@ -84,7 +93,7 @@ func * (multiplier: CGFloat, vector: CGVector) -> CGVector {
 }
 
 extension CGPoint {
-  enum PolygonConstructionError: ErrorProtocol {
+  enum PolygonConstructionError : ErrorProtocol {
     case invalidSideCount(Int)
     case invalidCenterToCornerDistance(CGFloat)
   }
@@ -128,7 +137,7 @@ extension CGPoint {
 }
 
 extension UIBezierPath {
-  enum PolygonConstructionError: ErrorProtocol {
+  enum PolygonConstructionError : ErrorProtocol {
     case noPoint
     case tooFewPoints([CGPoint])
   }
@@ -167,9 +176,11 @@ extension UIBezierPath {
     }
 
     // Gets the polygon's corner points.
-    let points = try CGPoint.cornerPointsForRegularPolygon(withSideCount: sideCount,
-                                                           center: center,
-                                                           cornerDistance: sideLength)
+    let points = try CGPoint.cornerPointsForRegularPolygon(
+      withSideCount: sideCount,
+      center: center,
+      cornerDistance: sideLength
+    )
     let polygonPath = UIBezierPath()
 
     // Moves to the last point and then starts iterating through all of them.
@@ -179,4 +190,3 @@ extension UIBezierPath {
     return polygonPath
   }
 }
-
