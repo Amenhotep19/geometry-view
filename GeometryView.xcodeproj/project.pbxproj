@@ -107,7 +107,7 @@
 			children = (
 				DD680C181D37A5D500FEE8F0 /* Model.swift */,
 				DD680C1C1D37A61300FEE8F0 /* GeometryView.swift */,
-				DD680C211D37A63F00FEE8F0 /* Viewing */,
+				DD680BEE1D37A56900FEE8F0 /* Main.storyboard */,
 				DD680C201D37A62200FEE8F0 /* Supporting */,
 			);
 			path = GeometryView;
@@ -134,21 +134,13 @@
 		DD680C201D37A62200FEE8F0 /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
+				DD680BEC1D37A56900FEE8F0 /* ViewController.swift */,
 				DD680BEA1D37A56900FEE8F0 /* AppDelegate.swift */,
 				DD680BF11D37A56900FEE8F0 /* Assets.xcassets */,
 				DD680BF31D37A56900FEE8F0 /* LaunchScreen.storyboard */,
 				DD680BF61D37A56900FEE8F0 /* Info.plist */,
 			);
 			name = Supporting;
-			sourceTree = "<group>";
-		};
-		DD680C211D37A63F00FEE8F0 /* Viewing */ = {
-			isa = PBXGroup;
-			children = (
-				DD680BEC1D37A56900FEE8F0 /* ViewController.swift */,
-				DD680BEE1D37A56900FEE8F0 /* Main.storyboard */,
-			);
-			name = Viewing;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

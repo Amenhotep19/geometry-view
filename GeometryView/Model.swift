@@ -9,18 +9,20 @@
 import UIKit
 
 /// A struct describing a two-dimensional line with a starting end an end point.
-struct Line {
-  enum ConnectionError : ErrorProtocol {
+internal struct Line {
+  internal enum ConnectionError : ErrorProtocol {
     case noPoints
     case singlePoint(CGPoint)
   }
 
-  enum SegmentationError : ErrorProtocol {
+  internal enum SegmentationError : ErrorProtocol {
     case invalidNumberOfSegments(Int)
   }
 
   /// Returns an array of `Line`s connecting all of the `points` in order.
-  static func linesConsecutivelyConnecting(points: [CGPoint]) throws -> [Line] {
+  internal static func linesConsecutivelyConnecting(
+    points: [CGPoint]
+  ) throws -> [Line] {
     guard !points.isEmpty else { throw ConnectionError.noPoints }
     guard points.count > 1 else {
       throw ConnectionError.singlePoint(points.first!)
@@ -41,19 +43,21 @@ struct Line {
     return pointPairs.map(Line.init)
   }
 
-  var start: CGPoint
-  var vector: CGVector
+  internal var start: CGPoint
+  internal var vector: CGVector
 
-  var end: CGPoint {
+  internal var end: CGPoint {
     return start + vector
   }
 
   /// Returns an array containing the points that segment `self` into the given
   /// `numberOfSegments`.
-  func segmented(numberOfSegments: Int) throws -> [CGPoint] {
-    guard numberOfSegments > 1 else {
+  internal func segmented(numberOfSegments: Int) throws -> [CGPoint] {
+    guard numberOfSegments > 0 else {
       throw SegmentationError.invalidNumberOfSegments(numberOfSegments)
     }
+
+    guard numberOfSegments > 1 else { return [] }
 
     // Creates an array of `CGFloat`s holding the incremental fractions
     // discribed by `n / numberOfSegments where n < numberOfSegments`.
@@ -66,36 +70,36 @@ struct Line {
     return mulitpliers.map { return start + ($0 * vector) }
   }
 
-  init(start: CGPoint, vector: CGVector) {
+  internal init(start: CGPoint, vector: CGVector) {
     self.start = start
     self.vector = vector
   }
 
-  init(start: CGPoint, end: CGPoint) {
+  internal init(start: CGPoint, end: CGPoint) {
     self.start = start
     vector = CGVector(dx: end.x - start.x, dy: end.y - start.y)
   }
 }
 
 extension Line : Equatable { }
-func ==(lhs: Line, rhs: Line) -> Bool {
+internal func ==(lhs: Line, rhs: Line) -> Bool {
   return (lhs.start, lhs.vector) == (rhs.start, rhs.vector)
 }
 
 // Vector operation
-func + (point: CGPoint, vector: CGVector) -> CGPoint {
+internal func + (point: CGPoint, vector: CGVector) -> CGPoint {
   return CGPoint(x: point.x + vector.dx, y: point.y + vector.dy)
 }
 
 // Vector operation
-func * (multiplier: CGFloat, vector: CGVector) -> CGVector {
+internal func * (multiplier: CGFloat, vector: CGVector) -> CGVector {
   return CGVector(dx: multiplier * vector.dx, dy: multiplier * vector.dy)
 }
 
 extension CGPoint {
   enum PolygonConstructionError : ErrorProtocol {
     case invalidSideCount(Int)
-    case invalidCenterToCornerDistance(CGFloat)
+    case invalidCornerDistance(CGFloat)
   }
 
   /// Returns an array of points holding the coordinates for the corners of a
@@ -106,10 +110,10 @@ extension CGPoint {
     cornerDistance distance: CGFloat
   ) throws -> [CGPoint] {
     guard sideCount > 2 else {
-      throw PolygonConstructionError.invalidSideCount(sideCount)
+      throw CGPoint.PolygonConstructionError.invalidSideCount(sideCount)
     }
     guard distance > 0 else {
-      throw PolygonConstructionError.invalidCenterToCornerDistance(distance)
+      throw CGPoint.PolygonConstructionError.invalidCornerDistance(distance)
     }
 
     // Calculates the angle needed to construct the polygon iteratively.
@@ -137,17 +141,19 @@ extension CGPoint {
 }
 
 extension UIBezierPath {
-  enum PolygonConstructionError : ErrorProtocol {
+  internal enum PolygonConstructionError : ErrorProtocol {
     case noPoint
     case tooFewPoints([CGPoint])
   }
 
   /// Returns a `UIBezierPath` that connects all of the given `points` in s
   /// closed fashion.
-  static func polygon(fromPoints points: [CGPoint]) throws -> UIBezierPath {
-    guard points.count > 0 else { throw PolygonConstructionError.noPoint }
+  internal static func polygon(
+    fromPoints points: [CGPoint]
+  ) throws -> UIBezierPath {
+    guard points.count > 0 else { throw UIBezierPath.PolygonConstructionError.noPoint }
     guard points.count > 2 else {
-      throw PolygonConstructionError.tooFewPoints(points)
+      throw UIBezierPath.PolygonConstructionError.tooFewPoints(points)
     }
 
     var points = points
@@ -162,17 +168,20 @@ extension UIBezierPath {
 
   /// Returns a `UIBezierPath` forming a regular polygon with the given
   /// properties.
-  static func regularPolygon(
+  internal static func regularPolygon(
     sideCount: Int,
     center: CGPoint,
     sideLength: CGFloat
   ) throws -> UIBezierPath {
     // Returns a circle if `sideCount` is `1`.
     guard sideCount != 1 else {
-      return UIBezierPath(arcCenter: center,
-                          radius: sideLength,
-                          startAngle: 0, endAngle: 2 * CGFloat.pi,
-                          clockwise: false)
+      return UIBezierPath(
+        arcCenter: center,
+        radius: sideLength,
+        startAngle: 0,
+        endAngle: 2 * CGFloat.pi,
+        clockwise: false
+      )
     }
 
     // Gets the polygon's corner points.

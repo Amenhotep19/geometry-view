@@ -17,11 +17,44 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mpQ-Dk-Pay" customClass="GeometryView" customModule="GeometryView" customModuleProvider="target">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layers">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="polygonSideCount">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="structureSideCount">
+                                        <integer key="value" value="6"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="drawPolygonEdges" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="drawStructureEdges" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="colorInPolygons" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="randomColors" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="innerColor">
+                                        <color key="value" red="0.0" green="0.0" blue="1" alpha="0.6602873322147651" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="outerColor">
+                                        <color key="value" red="1" green="1" blue="0.0" alpha="0.29467281879194629" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="mpQ-Dk-Pay" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="6Q2-dg-v5r"/>
+                            <constraint firstItem="mpQ-Dk-Pay" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="U6u-dD-3cW"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="mpQ-Dk-Pay" secondAttribute="bottom" id="qWI-LE-axf"/>
+                            <constraint firstAttribute="trailing" secondItem="mpQ-Dk-Pay" secondAttribute="trailing" id="woW-LB-d9d"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="101" y="119"/>
         </scene>
     </scenes>
 </document>
