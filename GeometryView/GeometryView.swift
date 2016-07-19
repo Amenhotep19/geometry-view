@@ -152,6 +152,8 @@ public class GeometryView: UIView {
   }
 
   private func layerSpecificColor(layer: Int) -> UIColor {
+    guard innerColor != outerColor else { return innerColor }
+    
     let layerFactor = CGFloat(layer) / CGFloat(layers)
 
     // Gets the color components from `innerColor` and `outerColor` and
