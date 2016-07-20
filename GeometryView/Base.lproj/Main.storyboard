@@ -22,23 +22,23 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layers">
-                                        <integer key="value" value="3"/>
+                                        <integer key="value" value="4"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="polygonSideCount">
-                                        <integer key="value" value="3"/>
+                                        <integer key="value" value="6"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="structureSideCount">
-                                        <integer key="value" value="47"/>
+                                        <integer key="value" value="6"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="drawPolygonEdges" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="drawPolygonEdges" value="YES"/>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="drawStructureEdges" value="NO"/>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="colorInPolygons" value="YES"/>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="randomColors" value="NO"/>
                                     <userDefinedRuntimeAttribute type="color" keyPath="innerColor">
-                                        <color key="value" red="0.0" green="0.0" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                                        <color key="value" red="0.65497448979591832" green="0.0" blue="1" alpha="0.50584626677852351" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="outerColor">
-                                        <color key="value" red="0.0" green="1" blue="0.32251806972789115" alpha="0.29467281879194629" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" red="0.0" green="0.54413796768707479" blue="0.32251806972789115" alpha="0.29467281879194629" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
@@ -54,7 +54,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="101" y="119"/>
+            <point key="canvasLocation" x="-36" y="131"/>
         </scene>
     </scenes>
 </document>

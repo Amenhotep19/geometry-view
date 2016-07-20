@@ -152,36 +152,31 @@ public class GeometryView: UIView {
   }
 
   private func layerSpecificColor(layer: Int) -> UIColor {
+    // Returns one of the colors if they are equal.
     guard innerColor != outerColor else { return innerColor }
     
     let layerFactor = CGFloat(layer) / CGFloat(layers)
 
-    // Gets the color components from `innerColor` and `outerColor` and
-    // converts them to a `[CGFloat]`.
-    let innerCC = innerColor.cgColor.components
-    let outerCC = outerColor.cgColor.components
-    let innerComponents = Array(UnsafeBufferPointer(start: innerCC, count: 4))
-    let outerComponents = Array(UnsafeBufferPointer(start: outerCC, count: 4))
-
     // Constructs an array of color components mixed proportionally from
     // `innerColor` and `outerColor` to fit the current `layer`.
-    let layerColorComponents = zip(innerComponents, outerComponents).map {
-      inner, outer -> CGFloat in
+    let components = zip(innerColor.hsbaComponents, outerColor.hsbaComponents)
+    let layerColorComponents = components.map { inner, outer -> CGFloat in
       let (smaller, larger) = inner < outer ? (inner, outer) : (outer, inner)
       return smaller + (layerFactor * (larger - smaller))
     }
 
     // Constructs a new `UIColor` from the mixed `layorColorComponents`.
     return UIColor(
-      red:   layerColorComponents[0],
-      green: layerColorComponents[1],
-      blue:  layerColorComponents[2],
-      alpha: layerColorComponents[3]
+      hue:        layerColorComponents[0],
+      saturation: layerColorComponents[1],
+      brightness: layerColorComponents[2],
+      alpha:      layerColorComponents[3]
     )
   }
 }
 
 extension UIColor {
+  /// Returns a random color.
   static func random() -> UIColor {
     // Generates three random numbers between 0 and 1.
     let hue        = CGFloat(arc4random() % 256) / 256.0
@@ -196,6 +191,25 @@ extension UIColor {
       brightness: brightness,
       alpha:      alpha
     )
+  }
+
+  /// Returns an array of `CGFloat`s containing four elements with `self`'s:
+  /// * hue (index `0`)
+  /// * saturation (index `1`)
+  /// * brightness (index `2`)
+  /// * alpha (index `3`)
+  var hsbaComponents: [CGFloat] {
+    // Constructs the array in which to store the HSBA-components.
+    var components = [CGFloat](repeating: 0.0, count: 4)
+
+    // Stores `self`'s HSBA-component values in `components`.
+    getHue(       &(components[0]),
+      saturation: &(components[1]),
+      brightness: &(components[2]),
+      alpha:      &(components[3])
+    )
+
+    return components
   }
 }
 
