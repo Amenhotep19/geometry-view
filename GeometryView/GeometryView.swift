@@ -25,6 +25,14 @@ public class GeometryView: UIView {
     didSet { structureSideCount = max(1, structureSideCount) }
   }
 
+  @IBInspectable
+  var zoom: CGFloat = 1.0 {
+    didSet { zoom = max(0.0, zoom) }
+  }
+
+  @IBInspectable
+  var reverseDrawingOrder: Bool = true
+
   // Drawing related properties.
   @IBInspectable
   var drawPolygonEdges: Bool = true
@@ -34,6 +42,8 @@ public class GeometryView: UIView {
   // Color related properties.
   @IBInspectable
   var colorInPolygons: Bool = false
+  @IBInspectable
+  var drawPolyonEdgesInBlack: Bool = false
   @IBInspectable
   var randomColors: Bool = false
   @IBInspectable
@@ -46,17 +56,33 @@ public class GeometryView: UIView {
     return CGPoint(x: bounds.midX, y: bounds.midY)
   }
 
-  let constant = CGFloat(50)
+  // Returns the length of the shorter side of the current `UIScreen`.
+  var shorterScreenLength: CGFloat {
+    let screenBounds = UIScreen.main().bounds
+    return min(screenBounds.width, screenBounds.height)
+  }
+
+  var polygonSideLength: CGFloat {
+    return shorterScreenLength * zoom / CGFloat(layers) / 2.0
+  }
 
   public override func draw(_ rect: CGRect) {
-    for layer in 0..<layers {
+    let layerArray = Array(stride(from: 0, to: layers, by: 1))
+    let layerNumbers: [Int]
+    if reverseDrawingOrder {
+      layerNumbers = layerArray
+    } else {
+      layerNumbers = layerArray.reversed()
+    }
+
+    for layer in layerNumbers {
       // Gets the corner points for the structural shape of the layers.
       let structureCorners: [CGPoint]
       do {
         structureCorners = try CGPoint.cornerPointsForRegularPolygon(
           withSideCount: structureSideCount,
           center: boundsCenter,
-          cornerDistance: CGFloat(layer) * constant
+          cornerDistance: CGFloat(layer) * polygonSideLength
         )
       } catch CGPoint.PolygonConstructionError.invalidCornerDistance(let distance) {
         // `distance` should only be 0 when `layer` is 0, in which case one
@@ -131,15 +157,10 @@ public class GeometryView: UIView {
         polygonPath = try UIBezierPath.regularPolygon(
           sideCount: polygonSideCount,
           center: polygonCenter,
-          sideLength: constant
+          sideLength: polygonSideLength
         )
       } catch {
         fatalError("Can't return from error: \(error)")
-      }
-
-      // Possibly draws the edges of the polygon.
-      if drawPolygonEdges {
-        polygonPath.stroke()
       }
 
       // Possibly fills in the color of the polygon dependent on the
@@ -147,6 +168,14 @@ public class GeometryView: UIView {
       if colorInPolygons {
         (randomColors ? UIColor.random() : specificLayerColor!).set()
         polygonPath.fill()
+      }
+
+      // Possibly draws the edges of the polygon.
+      if drawPolygonEdges {
+        if drawPolyonEdgesInBlack {
+          UIColor.black().set()
+        }
+        polygonPath.stroke()
       }
     }
   }
