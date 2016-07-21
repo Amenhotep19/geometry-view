@@ -10,19 +10,10 @@ import UIKit
 
 @IBDesignable
 public class GeometryView: UIView {
+  // Representation value related properties.
   @IBInspectable
   var layers: Int = 1 {
     didSet { layers = max(1, layers) }
-  }
-
-  @IBInspectable
-  var polygonSideCount: Int = 1 {
-    didSet { polygonSideCount = max(1, polygonSideCount) }
-  }
-
-  @IBInspectable
-  var structureSideCount: Int = 1 {
-    didSet { structureSideCount = max(1, structureSideCount) }
   }
 
   @IBInspectable
@@ -31,9 +22,21 @@ public class GeometryView: UIView {
   }
 
   @IBInspectable
-  var reverseDrawingOrder: Bool = true
+  var structureSideCount: Int = 3 {
+    didSet { structureSideCount = max(3, structureSideCount) }
+  }
+
+  @IBInspectable
+  var polygonSideCount: Int = 3 {
+    didSet { polygonSideCount = max(3, polygonSideCount) }
+  }
+
+  @IBInspectable
+  var replacePolygonsWithCircles: Bool = false
 
   // Drawing related properties.
+  @IBInspectable
+  var reverseDrawingOrder: Bool = false
   @IBInspectable
   var drawPolygonEdges: Bool = true
   @IBInspectable
@@ -62,18 +65,18 @@ public class GeometryView: UIView {
     return min(screenBounds.width, screenBounds.height)
   }
 
-  var polygonSideLength: CGFloat {
+  var polygonCornerDistance: CGFloat {
     return shorterScreenLength * zoom / CGFloat(layers) / 2.0
   }
 
   public override func draw(_ rect: CGRect) {
-    let layerArray = Array(stride(from: 0, to: layers, by: 1))
-    let layerNumbers: [Int]
-    if reverseDrawingOrder {
-      layerNumbers = layerArray
-    } else {
-      layerNumbers = layerArray.reversed()
-    }
+    let layerNumbers: [Int] = {
+      if reverseDrawingOrder {
+        return Array(stride(from: 0, to: layers, by: 1))
+      } else {
+        return stride(from: 0, to: layers, by: 1).reversed()
+      }
+    }()
 
     for layer in layerNumbers {
       // Gets the corner points for the structural shape of the layers.
@@ -82,7 +85,7 @@ public class GeometryView: UIView {
         structureCorners = try CGPoint.cornerPointsForRegularPolygon(
           withSideCount: structureSideCount,
           center: boundsCenter,
-          cornerDistance: CGFloat(layer) * polygonSideLength
+          cornerDistance: CGFloat(layer) * polygonCornerDistance
         )
       } catch CGPoint.PolygonConstructionError.invalidCornerDistance(let distance) {
         // `distance` should only be 0 when `layer` is 0, in which case one
@@ -151,16 +154,30 @@ public class GeometryView: UIView {
 
     // Loop that draws each polygon in the `layer`.
     for polygonCenter in polygonCenters {
+      /*TODO-BEGIN*/
+      // Detect if polygon in the screen's coordinate space. In that case don't even draw it.
+      /*TODO-END*/
+
       // Gets the path of each polygon (changing center on each iteration).
       let polygonPath: UIBezierPath
-      do {
-        polygonPath = try UIBezierPath.regularPolygon(
-          sideCount: polygonSideCount,
-          center: polygonCenter,
-          sideLength: polygonSideLength
+      if replacePolygonsWithCircles {
+        polygonPath = UIBezierPath(
+          arcCenter: polygonCenter,
+          radius: polygonCornerDistance,
+          startAngle: 0,
+          endAngle: 2.0 * CGFloat.pi,
+          clockwise: false
         )
-      } catch {
-        fatalError("Can't return from error: \(error)")
+      } else {
+        do {
+          polygonPath = try UIBezierPath.regularPolygon(
+            sideCount: polygonSideCount,
+            center: polygonCenter,
+            cornerDistance: polygonCornerDistance
+          )
+        } catch {
+          fatalError("Can't return from error: \(error)")
+        }
       }
 
       // Possibly fills in the color of the polygon dependent on the
@@ -183,8 +200,8 @@ public class GeometryView: UIView {
   private func layerSpecificColor(layer: Int) -> UIColor {
     // Returns one of the colors if they are equal.
     guard innerColor != outerColor else { return innerColor }
-    
-    let layerFactor = CGFloat(layer) / CGFloat(layers)
+
+    let layerFactor = layers != 1 ? CGFloat(layer) / CGFloat(layers - 1) : 0
 
     // Constructs an array of color components mixed proportionally from
     // `innerColor` and `outerColor` to fit the current `layer`.

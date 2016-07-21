@@ -13,24 +13,14 @@
 		DD680BF21D37A56900FEE8F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD680BF11D37A56900FEE8F0 /* Assets.xcassets */; };
 		DD680BF51D37A56900FEE8F0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD680BF31D37A56900FEE8F0 /* LaunchScreen.storyboard */; };
 		DD680C001D37A56900FEE8F0 /* GeometryViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD680BFF1D37A56900FEE8F0 /* GeometryViewTests.swift */; };
-		DD680C0B1D37A56900FEE8F0 /* GeometryViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD680C0A1D37A56900FEE8F0 /* GeometryViewUITests.swift */; };
 		DD680C191D37A5D500FEE8F0 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD680C181D37A5D500FEE8F0 /* Model.swift */; };
 		DD680C1A1D37A5D500FEE8F0 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD680C181D37A5D500FEE8F0 /* Model.swift */; };
-		DD680C1B1D37A5D500FEE8F0 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD680C181D37A5D500FEE8F0 /* Model.swift */; };
 		DD680C1D1D37A61300FEE8F0 /* GeometryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD680C1C1D37A61300FEE8F0 /* GeometryView.swift */; };
 		DD680C1E1D37A61300FEE8F0 /* GeometryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD680C1C1D37A61300FEE8F0 /* GeometryView.swift */; };
-		DD680C1F1D37A61300FEE8F0 /* GeometryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD680C1C1D37A61300FEE8F0 /* GeometryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		DD680BFC1D37A56900FEE8F0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DD680BDF1D37A56900FEE8F0 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DD680BE61D37A56900FEE8F0;
-			remoteInfo = GeometryView;
-		};
-		DD680C071D37A56900FEE8F0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DD680BDF1D37A56900FEE8F0 /* Project object */;
 			proxyType = 1;
@@ -50,9 +40,6 @@
 		DD680BFB1D37A56900FEE8F0 /* GeometryViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GeometryViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD680BFF1D37A56900FEE8F0 /* GeometryViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryViewTests.swift; sourceTree = "<group>"; };
 		DD680C011D37A56900FEE8F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DD680C061D37A56900FEE8F0 /* GeometryViewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GeometryViewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		DD680C0A1D37A56900FEE8F0 /* GeometryViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryViewUITests.swift; sourceTree = "<group>"; };
-		DD680C0C1D37A56900FEE8F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD680C181D37A5D500FEE8F0 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		DD680C1C1D37A61300FEE8F0 /* GeometryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeometryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -72,13 +59,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DD680C031D37A56900FEE8F0 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -87,7 +67,6 @@
 			children = (
 				DD680BE91D37A56900FEE8F0 /* GeometryView */,
 				DD680BFE1D37A56900FEE8F0 /* GeometryViewTests */,
-				DD680C091D37A56900FEE8F0 /* GeometryViewUITests */,
 				DD680BE81D37A56900FEE8F0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -97,7 +76,6 @@
 			children = (
 				DD680BE71D37A56900FEE8F0 /* GeometryView.app */,
 				DD680BFB1D37A56900FEE8F0 /* GeometryViewTests.xctest */,
-				DD680C061D37A56900FEE8F0 /* GeometryViewUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -120,15 +98,6 @@
 				DD680C011D37A56900FEE8F0 /* Info.plist */,
 			);
 			path = GeometryViewTests;
-			sourceTree = "<group>";
-		};
-		DD680C091D37A56900FEE8F0 /* GeometryViewUITests */ = {
-			isa = PBXGroup;
-			children = (
-				DD680C0A1D37A56900FEE8F0 /* GeometryViewUITests.swift */,
-				DD680C0C1D37A56900FEE8F0 /* Info.plist */,
-			);
-			path = GeometryViewUITests;
 			sourceTree = "<group>";
 		};
 		DD680C201D37A62200FEE8F0 /* Supporting */ = {
@@ -181,24 +150,6 @@
 			productReference = DD680BFB1D37A56900FEE8F0 /* GeometryViewTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		DD680C051D37A56900FEE8F0 /* GeometryViewUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = DD680C151D37A56900FEE8F0 /* Build configuration list for PBXNativeTarget "GeometryViewUITests" */;
-			buildPhases = (
-				DD680C021D37A56900FEE8F0 /* Sources */,
-				DD680C031D37A56900FEE8F0 /* Frameworks */,
-				DD680C041D37A56900FEE8F0 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				DD680C081D37A56900FEE8F0 /* PBXTargetDependency */,
-			);
-			name = GeometryViewUITests;
-			productName = GeometryViewUITests;
-			productReference = DD680C061D37A56900FEE8F0 /* GeometryViewUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -222,13 +173,6 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = DD680BE61D37A56900FEE8F0;
 					};
-					DD680C051D37A56900FEE8F0 = {
-						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 8YSJ38HAEZ;
-						DevelopmentTeamName = "Marcus Rossel (Personal Team)";
-						ProvisioningStyle = Automatic;
-						TestTargetID = DD680BE61D37A56900FEE8F0;
-					};
 				};
 			};
 			buildConfigurationList = DD680BE21D37A56900FEE8F0 /* Build configuration list for PBXProject "GeometryView" */;
@@ -246,7 +190,6 @@
 			targets = (
 				DD680BE61D37A56900FEE8F0 /* GeometryView */,
 				DD680BFA1D37A56900FEE8F0 /* GeometryViewTests */,
-				DD680C051D37A56900FEE8F0 /* GeometryViewUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -263,13 +206,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		DD680BF91D37A56900FEE8F0 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DD680C041D37A56900FEE8F0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -300,16 +236,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DD680C021D37A56900FEE8F0 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DD680C1F1D37A61300FEE8F0 /* GeometryView.swift in Sources */,
-				DD680C0B1D37A56900FEE8F0 /* GeometryViewUITests.swift in Sources */,
-				DD680C1B1D37A5D500FEE8F0 /* Model.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -317,11 +243,6 @@
 			isa = PBXTargetDependency;
 			target = DD680BE61D37A56900FEE8F0 /* GeometryView */;
 			targetProxy = DD680BFC1D37A56900FEE8F0 /* PBXContainerItemProxy */;
-		};
-		DD680C081D37A56900FEE8F0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DD680BE61D37A56900FEE8F0 /* GeometryView */;
-			targetProxy = DD680C071D37A56900FEE8F0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -484,30 +405,6 @@
 			};
 			name = Release;
 		};
-		DD680C161D37A56900FEE8F0 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = GeometryViewUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.marcusrossel.GeometryViewUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = GeometryView;
-			};
-			name = Debug;
-		};
-		DD680C171D37A56900FEE8F0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = GeometryViewUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.marcusrossel.GeometryViewUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = GeometryView;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -534,15 +431,6 @@
 			buildConfigurations = (
 				DD680C131D37A56900FEE8F0 /* Debug */,
 				DD680C141D37A56900FEE8F0 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		DD680C151D37A56900FEE8F0 /* Build configuration list for PBXNativeTarget "GeometryViewUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				DD680C161D37A56900FEE8F0 /* Debug */,
-				DD680C171D37A56900FEE8F0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

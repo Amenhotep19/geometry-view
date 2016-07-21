@@ -171,24 +171,13 @@ extension UIBezierPath {
   internal static func regularPolygon(
     sideCount: Int,
     center: CGPoint,
-    sideLength: CGFloat
+    cornerDistance: CGFloat
   ) throws -> UIBezierPath {
-    // Returns a circle if `sideCount` is `1`.
-    guard sideCount != 1 else {
-      return UIBezierPath(
-        arcCenter: center,
-        radius: sideLength,
-        startAngle: 0,
-        endAngle: 2 * CGFloat.pi,
-        clockwise: false
-      )
-    }
-
     // Gets the polygon's corner points.
     let points = try CGPoint.cornerPointsForRegularPolygon(
       withSideCount: sideCount,
       center: center,
-      cornerDistance: sideLength
+      cornerDistance: cornerDistance
     )
     let polygonPath = UIBezierPath()
 
