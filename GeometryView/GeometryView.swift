@@ -10,59 +10,61 @@ import UIKit
 
 @IBDesignable
 public class GeometryView : UIView {
-  struct DrawingOptions : OptionSet {
-    var rawValue: Int
-    static let reverseDrawingOrder        = DrawingOptions(rawValue: 1 << 0)
-    static let drawPolygonEdges           = DrawingOptions(rawValue: 1 << 1)
-    static let drawStructureEdges         = DrawingOptions(rawValue: 1 << 2)
-    static let replacePolygonsWithCircles = DrawingOptions(rawValue: 1 << 3)
+  public struct DrawingOptions : OptionSet {
+    public var rawValue: Int
+    public init(rawValue: Int) { self.rawValue = rawValue }
+    public static let reverseDrawingOrder        = DrawingOptions(rawValue: 1 << 0)
+    public static let drawPolygonEdges           = DrawingOptions(rawValue: 1 << 1)
+    public static let drawStructureEdges         = DrawingOptions(rawValue: 1 << 2)
+    public static let replacePolygonsWithCircles = DrawingOptions(rawValue: 1 << 3)
   }
 
-  struct ColorOptions : OptionSet {
-    var rawValue: Int
-    static let colorInPolygons         = ColorOptions(rawValue: 1 << 0)
-    static let useRandomColors         = ColorOptions(rawValue: 1 << 1)
-    static let usePolygonColorForEdges = ColorOptions(rawValue: 1 << 2)
+  public struct ColorOptions : OptionSet {
+    public var rawValue: Int
+    public init(rawValue: Int) { self.rawValue = rawValue }
+    public static let colorInPolygons         = ColorOptions(rawValue: 1 << 0)
+    public static let useRandomColors         = ColorOptions(rawValue: 1 << 1)
+    public static let usePolygonColorForEdges = ColorOptions(rawValue: 1 << 2)
   }
 
   // Representation value related properties.
   @IBInspectable
-  var layers: Int = 1 {
+  public var layers: Int = 1 {
     didSet { layers = max(1, layers) }
   }
 
   @IBInspectable
-  var zoom: CGFloat = 1.0 {
-    didSet { zoom = max(0.001, zoom) }
+  public var scale: CGFloat = 1.0 {
+    didSet { scale = max(0.001, scale) }
   }
 
   @IBInspectable
-  var structureSideCount: Int = 3 {
-    didSet { structureSideCount = max(3, structureSideCount) }
+  public var structureEdgeCount: Int = 3 {
+    didSet { structureEdgeCount = max(3, structureEdgeCount) }
   }
 
   @IBInspectable
-  var polygonSideCount: Int = 3 {
-    didSet { polygonSideCount = max(3, polygonSideCount) }
+  public var polygonEdgeCount: Int = 3 {
+    didSet { polygonEdgeCount = max(3, polygonEdgeCount) }
   }
 
   // Option related properties.
-  var drawingOptions: DrawingOptions = [.drawPolygonEdges]
-  var colorOptions = ColorOptions()
+  public var drawingOptions: DrawingOptions = [.drawPolygonEdges]
+  public var colorOptions = ColorOptions()
 
   // Color related properties.
   @IBInspectable
-  var innerColor: UIColor = UIColor.clear()
+  public var innerColor: UIColor = UIColor.clear()
   @IBInspectable
-  var outerColor: UIColor = UIColor.clear()
+  public var outerColor: UIColor = UIColor.clear()
 
   // Returns the center coordinate of `self`'s own coordinate space.
-  var boundsCenter: CGPoint {
+  private var boundsCenter: CGPoint {
     return CGPoint(x: bounds.midX, y: bounds.midY)
   }
 
-  var polygonCornerDistance: CGFloat {
-    return min(bounds.width, bounds.height) * zoom / CGFloat(layers) / 2.0
+  private var polygonCornerDistance: CGFloat {
+    return min(bounds.width, bounds.height) * scale / CGFloat(layers) / 2.0
   }
 
   public override func draw(_ rect: CGRect) {
@@ -87,7 +89,7 @@ public class GeometryView : UIView {
       let structureCorners: [CGPoint]
       do {
         structureCorners = try CGPoint.cornerPointsForRegularPolygon(
-          withSideCount: structureSideCount,
+          withEdgeCount: structureEdgeCount,
           center: boundsCenter,
           cornerDistance: CGFloat(layer) * polygonCornerDistance
         )
@@ -146,11 +148,19 @@ public class GeometryView : UIView {
     }
   }
 
-  /// Returns a `Bool` indicating whether all polygons in the given layer were
-  /// out of bounds, and hence not drawn.
+  /// Draws all of the things that should be drawn for the given `layer`.
+  ///
+  /// Aside from the passed parameters, this takes into account
+  /// * `polygonEdgeCount`
+  /// * `drawingOptions`
+  /// * `colorOptions`
+  /// * `polygonCornerDistance` (and therefore `layers`)
+  ///
+  /// - Returns: `true` if at least one polygon in the given `layer` was drawn.
   @discardableResult
   private func drawLayer(_ layer: Int, polygonCenters: [CGPoint]) -> Bool {
-    // Color precalculations.
+    // Determines if there is a specific color for this layer, and if there is
+    // what it is.
     let specificLayerColor: UIColor? = {
       if colorOptions.contains(.colorInPolygons) &&
         !colorOptions.contains(.useRandomColors) {
@@ -160,24 +170,31 @@ public class GeometryView : UIView {
       }
     }()
 
-    // Tracks if any polygon was drawn.
+    // Tracks if at least one polygon was drawn for the given `layer`.
     var drewAPolygon = false
 
     // Loop that draws each polygon in the `layer`.
     for polygonCenter in polygonCenters {
-      /*IMPROVE-BEGIN*/
+      // Test if the given `polygonCenter` will produce a polygon that would
+      // even lie within the view's coordinate space.
       let pathRectSize = CGSize(
         width: polygonCornerDistance,
         height: polygonCornerDistance
       )
+      // Produces a square `CGRect` that could perfectly hold the polygon that
+      // will be constructed.
       let pathRect = CGRect(center: polygonCenter, size: pathRectSize)
-      
-      guard pathRect.intersects(bounds) else { continue }
-      /*IMPROVE-END*/
 
+      // If the `pathRect` doesn't intersect the view's `bounds`, will not be
+      // visible and can be skipped in the drawing process.
+      guard pathRect.intersects(bounds) else { continue }
+
+      // If this point is reached a polygon will be drawn.
       drewAPolygon = true
 
       // Gets the path of each polygon (changing center on each iteration).
+      // If `drawingOptions` contains `.replacePolygonsWithCircles` cirlce paths
+      // will be constructed instead.
       let polygonPath: UIBezierPath
       if drawingOptions.contains(.replacePolygonsWithCircles) {
         polygonPath = UIBezierPath(
@@ -190,7 +207,7 @@ public class GeometryView : UIView {
       } else {
         do {
           polygonPath = try UIBezierPath.regularPolygon(
-            sideCount: polygonSideCount,
+            edgeCount: polygonEdgeCount,
             center: polygonCenter,
             cornerDistance: polygonCornerDistance
           )
@@ -200,18 +217,16 @@ public class GeometryView : UIView {
       }
 
       // Possibly fills in the color of the polygon dependent on the
-      // specifications.
+      // `colorOptions`.
       if colorOptions.contains(.colorInPolygons) {
-        if colorOptions.contains(.useRandomColors) {
-          UIColor.random().set()
-        } else {
-          specificLayerColor!.set()
-        }
-
+        // If there is a `specificLayerColor`, `colorOptions` can't contain
+        // `.useRandomColors`.
+        (specificLayerColor ?? UIColor.random()).set()
         polygonPath.fill()
       }
 
-      // Possibly draws the edges of the polygon.
+      // Possibly draws the edges of the polygon dependent on the
+      // `drawingOptions`.
       if drawingOptions.contains(.drawPolygonEdges) {
         if !colorOptions.contains(.usePolygonColorForEdges) {
           UIColor.black().set()
@@ -223,10 +238,16 @@ public class GeometryView : UIView {
     return drewAPolygon
   }
 
+  /// Calculates the specific color that will be applied to each polygon in a
+  /// given `layer`.
+  /// This calculation in not only based on the parameter `layer`, but also
+  /// takes `layers`, `innerColor` and `outerColor` into account.
   private func layerSpecificColor(layer: Int) -> UIColor {
     // Returns one of the colors if they are equal.
     guard innerColor != outerColor else { return innerColor }
 
+    // Calculates the ratio between the portion of `innerColor` and `outerColor`
+    // that should go into the returned color for the given `layer`.
     let layerFactor = layers != 1 ? CGFloat(layer) / CGFloat(layers - 1) : 0
 
     // Constructs an array of color components mixed proportionally from
@@ -248,7 +269,9 @@ public class GeometryView : UIView {
 }
 
 extension CGRect {
-  init(center: CGPoint, size: CGSize) {
+  /// An initializer that works like `init(origin:size:)` but calculates
+  /// `origin` form `center` and `size`.
+  internal init(center: CGPoint, size: CGSize) {
     origin = CGPoint(
       x: center.x - size.width  / 2,
       y: center.y - size.height / 2
@@ -259,14 +282,14 @@ extension CGRect {
 
 extension UIColor {
   /// Returns a random color.
-  static func random() -> UIColor {
+  internal static func random() -> UIColor {
     // Generates three random numbers between 0 and 1.
     let hue        = CGFloat(arc4random() % 256) / 256.0
     let saturation = CGFloat(arc4random() % 256) / 256.0
     let brightness = CGFloat(arc4random() % 256) / 256.0
     let alpha      = CGFloat(arc4random() % 256) / 256.0
 
-    // Constructs a `UIColor` from the random numbers.
+    // Constructs and returns a `UIColor` from the random numbers.
     return UIColor(
       hue:        hue,
       saturation: saturation,
@@ -280,7 +303,7 @@ extension UIColor {
   /// * saturation (index `1`)
   /// * brightness (index `2`)
   /// * alpha (index `3`)
-  var hsbaComponents: [CGFloat] {
+  internal var hsbaComponents: [CGFloat] {
     // Constructs the array in which to store the HSBA-components.
     var components = [CGFloat](repeating: 0.0, count: 4)
 

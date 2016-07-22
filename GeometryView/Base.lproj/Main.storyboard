@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11103.10"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -18,42 +19,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mpQ-Dk-Pay" customClass="GeometryView" customModule="GeometryView" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oMh-Iw-jQM" customClass="GeometryView" customModule="GeometryView" customModuleProvider="target">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layers">
-                                        <integer key="value" value="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="polygonSideCount">
-                                        <integer key="value" value="8"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="structureSideCount">
-                                        <integer key="value" value="6"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="zoom">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="innerColor">
-                                        <color key="value" red="0.43013743791242748" green="0.75166972745856608" blue="0.92404296875000003" alpha="0.64290583053691275" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="outerColor">
-                                        <color key="value" red="0.92931640625" green="0.3912878693955309" blue="0.72551340125319741" alpha="0.30350776006711411" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="oMh-Iw-jQM" secondAttribute="height" multiplier="1:1" id="B0h-gL-TPq"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="mpQ-Dk-Pay" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="6Q2-dg-v5r"/>
-                            <constraint firstItem="mpQ-Dk-Pay" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="U6u-dD-3cW"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="mpQ-Dk-Pay" secondAttribute="bottom" id="qWI-LE-axf"/>
-                            <constraint firstAttribute="trailing" secondItem="mpQ-Dk-Pay" secondAttribute="trailing" id="woW-LB-d9d"/>
+                            <constraint firstItem="oMh-Iw-jQM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="7LF-NF-xWA"/>
+                            <constraint firstAttribute="trailing" secondItem="oMh-Iw-jQM" secondAttribute="trailing" id="IY6-b0-ECh"/>
+                            <constraint firstItem="oMh-Iw-jQM" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="OIk-Ik-taR"/>
+                            <constraint firstItem="oMh-Iw-jQM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cnG-o8-7dj"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="109" y="118"/>
+            <point key="canvasLocation" x="108.75" y="117.5"/>
         </scene>
     </scenes>
 </document>

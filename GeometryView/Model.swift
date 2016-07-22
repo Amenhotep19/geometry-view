@@ -98,32 +98,32 @@ internal func * (multiplier: CGFloat, vector: CGVector) -> CGVector {
 
 extension CGPoint {
   enum PolygonConstructionError : ErrorProtocol {
-    case invalidSideCount(Int)
+    case invalidEdgeCount(Int)
     case invalidCornerDistance(CGFloat)
   }
 
   /// Returns an array of points holding the coordinates for the corners of a
-  /// homogenous polygon with `sideCount` sides.
+  /// homogenous polygon with `edgeCount` edges.
   static func cornerPointsForRegularPolygon(
-    withSideCount sideCount: Int,
+    withEdgeCount edgeCount: Int,
     center: CGPoint,
     cornerDistance distance: CGFloat
   ) throws -> [CGPoint] {
-    guard sideCount > 2 else {
-      throw CGPoint.PolygonConstructionError.invalidSideCount(sideCount)
+    guard edgeCount > 2 else {
+      throw CGPoint.PolygonConstructionError.invalidEdgeCount(edgeCount)
     }
     guard distance > 0 else {
       throw CGPoint.PolygonConstructionError.invalidCornerDistance(distance)
     }
 
     // Calculates the angle needed to construct the polygon iteratively.
-    let modifier = (CGFloat(sideCount) - 2) / CGFloat(sideCount)
+    let modifier = (CGFloat(edgeCount) - 2) / CGFloat(edgeCount)
     let insideAngle = CGFloat.pi - (CGFloat.pi * modifier)
 
     // Constructs an array of `CGFloat`s incrementally describing the angles for
     // reaching each corner point of the polygon.
-    let angles = (1...sideCount).map { side in
-      return insideAngle * CGFloat(side)
+    let angles = (1...edgeCount).map { edge in
+      return insideAngle * CGFloat(edge)
     }
 
     // Constructs an array of `CGPoints` describing the corner points of the
@@ -169,13 +169,13 @@ extension UIBezierPath {
   /// Returns a `UIBezierPath` forming a regular polygon with the given
   /// properties.
   internal static func regularPolygon(
-    sideCount: Int,
+    edgeCount: Int,
     center: CGPoint,
     cornerDistance: CGFloat
   ) throws -> UIBezierPath {
     // Gets the polygon's corner points.
     let points = try CGPoint.cornerPointsForRegularPolygon(
-      withSideCount: sideCount,
+      withEdgeCount: edgeCount,
       center: center,
       cornerDistance: cornerDistance
     )
