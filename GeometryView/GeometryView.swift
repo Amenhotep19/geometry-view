@@ -9,7 +9,22 @@
 import UIKit
 
 @IBDesignable
-public class GeometryView: UIView {
+public class GeometryView : UIView {
+  struct DrawingOptions : OptionSet {
+    var rawValue: Int
+    static let reverseDrawingOrder        = DrawingOptions(rawValue: 1 << 0)
+    static let drawPolygonEdges           = DrawingOptions(rawValue: 1 << 1)
+    static let drawStructureEdges         = DrawingOptions(rawValue: 1 << 2)
+    static let replacePolygonsWithCircles = DrawingOptions(rawValue: 1 << 3)
+  }
+
+  struct ColorOptions : OptionSet {
+    var rawValue: Int
+    static let colorInPolygons         = ColorOptions(rawValue: 1 << 0)
+    static let useRandomColors         = ColorOptions(rawValue: 1 << 1)
+    static let usePolygonColorForEdges = ColorOptions(rawValue: 1 << 2)
+  }
+
   // Representation value related properties.
   @IBInspectable
   var layers: Int = 1 {
@@ -31,24 +46,11 @@ public class GeometryView: UIView {
     didSet { polygonSideCount = max(3, polygonSideCount) }
   }
 
-  @IBInspectable
-  var replacePolygonsWithCircles: Bool = false
-
-  // Drawing related properties.
-  @IBInspectable
-  var reverseDrawingOrder: Bool = false
-  @IBInspectable
-  var drawPolygonEdges: Bool = true
-  @IBInspectable
-  var drawStructureEdges: Bool = false
+  // Option related properties.
+  var drawingOptions: DrawingOptions = [.drawPolygonEdges]
+  var colorOptions = ColorOptions()
 
   // Color related properties.
-  @IBInspectable
-  var colorInPolygons: Bool = false
-  @IBInspectable
-  var drawPolyonEdgesInBlack: Bool = false
-  @IBInspectable
-  var randomColors: Bool = false
   @IBInspectable
   var innerColor: UIColor = UIColor.clear()
   @IBInspectable
@@ -71,7 +73,7 @@ public class GeometryView: UIView {
 
   public override func draw(_ rect: CGRect) {
     let layerNumbers: [Int] = {
-      if reverseDrawingOrder {
+      if drawingOptions.contains(.reverseDrawingOrder) {
         return Array(stride(from: 0, to: layers, by: 1))
       } else {
         return stride(from: 0, to: layers, by: 1).reversed()
@@ -132,7 +134,7 @@ public class GeometryView: UIView {
 
       drawLayer(layer, polygonCenters: polygonCenters)
 
-      if drawStructureEdges {
+      if drawingOptions.contains(.drawStructureEdges) {
         do {
           try UIBezierPath.polygon(fromPoints: structureCorners).stroke()
         } catch {
@@ -145,7 +147,8 @@ public class GeometryView: UIView {
   private func drawLayer(_ layer: Int, polygonCenters: [CGPoint]) {
     // Color precalculations.
     let specificLayerColor: UIColor? = {
-      if colorInPolygons && !randomColors {
+      if colorOptions.contains(.colorInPolygons) &&
+        !colorOptions.contains(.useRandomColors) {
         return layerSpecificColor(layer: layer)
       } else {
         return nil
@@ -160,7 +163,7 @@ public class GeometryView: UIView {
 
       // Gets the path of each polygon (changing center on each iteration).
       let polygonPath: UIBezierPath
-      if replacePolygonsWithCircles {
+      if drawingOptions.contains(.replacePolygonsWithCircles) {
         polygonPath = UIBezierPath(
           arcCenter: polygonCenter,
           radius: polygonCornerDistance,
@@ -182,14 +185,19 @@ public class GeometryView: UIView {
 
       // Possibly fills in the color of the polygon dependent on the
       // specifications.
-      if colorInPolygons {
-        (randomColors ? UIColor.random() : specificLayerColor!).set()
+      if colorOptions.contains(.colorInPolygons) {
+        if colorOptions.contains(.useRandomColors) {
+          UIColor.random().set()
+        } else {
+          specificLayerColor!.set()
+        }
+
         polygonPath.fill()
       }
 
       // Possibly draws the edges of the polygon.
-      if drawPolygonEdges {
-        if drawPolyonEdgesInBlack {
+      if drawingOptions.contains(.drawPolygonEdges) {
+        if !colorOptions.contains(.usePolygonColorForEdges) {
           UIColor.black().set()
         }
         polygonPath.stroke()
