@@ -22,28 +22,23 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layers">
-                                        <integer key="value" value="20"/>
+                                        <integer key="value" value="4"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="polygonSideCount">
-                                        <integer key="value" value="3"/>
+                                        <integer key="value" value="8"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="structureSideCount">
                                         <integer key="value" value="6"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="zoom">
-                                        <real key="value" value="2"/>
+                                        <real key="value" value="1"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="drawFromInside" value="YES"/>
                                     <userDefinedRuntimeAttribute type="color" keyPath="innerColor">
                                         <color key="value" red="0.43013743791242748" green="0.75166972745856608" blue="0.92404296875000003" alpha="0.64290583053691275" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="outerColor">
                                         <color key="value" red="0.92931640625" green="0.3912878693955309" blue="0.72551340125319741" alpha="0.30350776006711411" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="drawPolygonEdges" value="NO"/>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="colorInPolygons" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="replacePolygonsWithCircles" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="reverseDrawingOrder" value="NO"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
@@ -58,7 +53,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-107" y="122"/>
+            <point key="canvasLocation" x="109" y="118"/>
         </scene>
     </scenes>
 </document>
