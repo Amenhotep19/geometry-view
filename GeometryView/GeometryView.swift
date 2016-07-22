@@ -33,7 +33,7 @@ public class GeometryView : UIView {
 
   @IBInspectable
   var zoom: CGFloat = 1.0 {
-    didSet { zoom = max(0.0, zoom) }
+    didSet { zoom = max(0.001, zoom) }
   }
 
   @IBInspectable
@@ -61,14 +61,8 @@ public class GeometryView : UIView {
     return CGPoint(x: bounds.midX, y: bounds.midY)
   }
 
-  // Returns the length of the shorter side of the current `UIScreen`.
-  var shorterScreenLength: CGFloat {
-    let screenBounds = UIScreen.main().bounds
-    return min(screenBounds.width, screenBounds.height)
-  }
-
   var polygonCornerDistance: CGFloat {
-    return shorterScreenLength * zoom / CGFloat(layers) / 2.0
+    return min(bounds.width, bounds.height) * zoom / CGFloat(layers) / 2.0
   }
 
   public override func draw(_ rect: CGRect) {
@@ -80,7 +74,15 @@ public class GeometryView : UIView {
       }
     }()
 
+    // Tracks if the previous layer was even drawn.
+    var previousLayerWasDrawn = true
+
     for layer in layerNumbers {
+      // If the previous layer wasn't drawn (and the drawing order isn't
+      // reversed), no future layers will be drawn, so `draw(_:)` is completed.
+      guard !drawingOptions.contains(.reverseDrawingOrder) &&
+        previousLayerWasDrawn else { return }
+
       // Gets the corner points for the structural shape of the layers.
       let structureCorners: [CGPoint]
       do {
@@ -132,7 +134,7 @@ public class GeometryView : UIView {
         return [cornerPoint] + edgePoint
       }.flatMap { $0 }
 
-      drawLayer(layer, polygonCenters: polygonCenters)
+      previousLayerWasDrawn = drawLayer(layer, polygonCenters: polygonCenters)
 
       if drawingOptions.contains(.drawStructureEdges) {
         do {
@@ -144,7 +146,10 @@ public class GeometryView : UIView {
     }
   }
 
-  private func drawLayer(_ layer: Int, polygonCenters: [CGPoint]) {
+  /// Returns a `Bool` indicating whether all polygons in the given layer were
+  /// out of bounds, and hence not drawn.
+  @discardableResult
+  private func drawLayer(_ layer: Int, polygonCenters: [CGPoint]) -> Bool {
     // Color precalculations.
     let specificLayerColor: UIColor? = {
       if colorOptions.contains(.colorInPolygons) &&
@@ -155,11 +160,22 @@ public class GeometryView : UIView {
       }
     }()
 
+    // Tracks if any polygon was drawn.
+    var drewAPolygon = false
+
     // Loop that draws each polygon in the `layer`.
     for polygonCenter in polygonCenters {
-      /*TODO-BEGIN*/
-      // Detect if polygon in the screen's coordinate space. In that case don't even draw it.
-      /*TODO-END*/
+      /*IMPROVE-BEGIN*/
+      let pathRectSize = CGSize(
+        width: polygonCornerDistance,
+        height: polygonCornerDistance
+      )
+      let pathRect = CGRect(center: polygonCenter, size: pathRectSize)
+      
+      guard pathRect.intersects(bounds) else { continue }
+      /*IMPROVE-END*/
+
+      drewAPolygon = true
 
       // Gets the path of each polygon (changing center on each iteration).
       let polygonPath: UIBezierPath
@@ -203,6 +219,8 @@ public class GeometryView : UIView {
         polygonPath.stroke()
       }
     }
+
+    return drewAPolygon
   }
 
   private func layerSpecificColor(layer: Int) -> UIColor {
@@ -226,6 +244,16 @@ public class GeometryView : UIView {
       brightness: layerColorComponents[2],
       alpha:      layerColorComponents[3]
     )
+  }
+}
+
+extension CGRect {
+  init(center: CGPoint, size: CGSize) {
+    origin = CGPoint(
+      x: center.x - size.width  / 2,
+      y: center.y - size.height / 2
+    )
+    self.size = size
   }
 }
 
