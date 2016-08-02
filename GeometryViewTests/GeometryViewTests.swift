@@ -97,11 +97,11 @@ class GeometryViewTests: XCTestCase {
   func testCornerPointsForRegularPolygon() {
     do {
       let _ = try CGPoint.cornerPointsForRegularPolygon(
-        withSideCount: 0,
+        withEdgeCount: 0,
         center: point0,
         cornerDistance: 10
       )
-    } catch CGPoint.PolygonConstructionError.invalidSideCount(let count) {
+    } catch CGPoint.PolygonConstructionError.invalidEdgeCount(let count) {
       XCTAssertEqual(count, 0)
     } catch {
       XCTFail("Should have thrown error `PolygonConstructionError.invalidSideCount`")
@@ -109,7 +109,7 @@ class GeometryViewTests: XCTestCase {
 
     do {
       let _ = try CGPoint.cornerPointsForRegularPolygon(
-        withSideCount: 3,
+        withEdgeCount: 3,
         center: point0,
         cornerDistance: 0
       )
@@ -120,7 +120,7 @@ class GeometryViewTests: XCTestCase {
     }
 
     let points = try? CGPoint.cornerPointsForRegularPolygon(
-      withSideCount: 4,
+      withEdgeCount: 4,
       center: point0,
       cornerDistance: 50
     )
@@ -157,11 +157,11 @@ class GeometryViewTests: XCTestCase {
   func testRegularPolygon() {
     do {
       let _ = try UIBezierPath.regularPolygon(
-        sideCount: 2,
+        edgeCount: 2,
         center: point0,
-        sideLength: 10
+        cornerDistance: 10
       )
-    } catch CGPoint.PolygonConstructionError.invalidSideCount(let count) {
+    } catch CGPoint.PolygonConstructionError.invalidEdgeCount(let count) {
       XCTAssertEqual(count, 2)
     } catch {
       XCTFail("Should have thrown error `PolygonConstructionError.invalidSideCount`")
@@ -169,9 +169,9 @@ class GeometryViewTests: XCTestCase {
 
     do {
       let _ = try UIBezierPath.regularPolygon(
-        sideCount: 4,
+        edgeCount: 4,
         center: point0,
-        sideLength: -23
+        cornerDistance: -23
       )
     } catch CGPoint.PolygonConstructionError.invalidCornerDistance(let distance) {
       XCTAssertEqual(distance, -23)
@@ -180,9 +180,9 @@ class GeometryViewTests: XCTestCase {
     }
 
     let path = try? UIBezierPath.regularPolygon(
-      sideCount: 4,
+      edgeCount: 4,
       center: point0,
-      sideLength: 50
+      cornerDistance: 50
     )
     XCTAssertNotNil(path)
 

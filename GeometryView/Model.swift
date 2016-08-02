@@ -10,12 +10,12 @@ import UIKit
 
 /// A struct describing a two-dimensional line with a starting end an end point.
 internal struct Line {
-  internal enum ConnectionError : ErrorProtocol {
+  internal enum ConnectionError : Error {
     case noPoints
     case singlePoint(CGPoint)
   }
 
-  internal enum SegmentationError : ErrorProtocol {
+  internal enum SegmentationError : Error {
     case invalidNumberOfSegments(Int)
   }
 
@@ -97,14 +97,14 @@ internal func * (multiplier: CGFloat, vector: CGVector) -> CGVector {
 }
 
 extension CGPoint {
-  enum PolygonConstructionError : ErrorProtocol {
+  internal enum PolygonConstructionError : Error {
     case invalidEdgeCount(Int)
     case invalidCornerDistance(CGFloat)
   }
 
   /// Returns an array of points holding the coordinates for the corners of a
   /// homogenous polygon with `edgeCount` edges.
-  static func cornerPointsForRegularPolygon(
+  internal static func cornerPointsForRegularPolygon(
     withEdgeCount edgeCount: Int,
     center: CGPoint,
     cornerDistance distance: CGFloat
@@ -141,7 +141,7 @@ extension CGPoint {
 }
 
 extension UIBezierPath {
-  internal enum PolygonConstructionError : ErrorProtocol {
+  internal enum PolygonConstructionError : Error {
     case noPoint
     case tooFewPoints([CGPoint])
   }
